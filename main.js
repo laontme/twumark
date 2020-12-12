@@ -1,7 +1,7 @@
 document.getElementsByTagName('button')[0].addEventListener('click', getReason);
 
 function getReason() {
-  let crashArray = document.getElementById('raw').value.split('\n');
+  let crash = document.getElementById('raw').value.split('\n');
   const exceptionAddress = parseInt(crash[1].replace('Exception At Address: ', ''));
 
   let modulesLine;
@@ -33,8 +33,8 @@ function getReason() {
   });
 
   crash.forEach((el, i) => {
-    if (exAddr > el.b) {
-      if (exAddr < el.b + el.s) {
+    if (exceptionAddress > el.b) {
+      if (exceptionAddress < el.b + el.s) {
         console.log(el.path);
         document.getElementById('reason').value = el.path;
       }
